@@ -1,0 +1,70 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package IndiefyLogin;
+
+import java.io.IOException;
+import java.sql.ResultSet;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+
+/**
+ *
+ * @author jacob
+ */
+public class LoginScreenController {
+
+    @FXML
+    TextField username;
+    
+    @FXML
+    PasswordField password;
+    
+    @FXML
+    Button loginButton;
+    
+    @FXML
+    Button nextButton;
+    
+    @FXML
+    Label indiefyLogo;
+    
+    @FXML
+    Label loginMessage;
+    
+
+    Database d = new Database();
+    
+
+    @FXML
+    private void handleLoginButtonAction(ActionEvent event) {
+        String user = username.getText().trim();
+        String pass = password.getText();
+       if (d.tryLogin(user, pass)) {
+            // What should the user see when the login is successful?
+            loginMessage.setText("Successfully Logged in!");
+            loginMessage.setVisible(true);
+            nextButton.setVisible(true);
+        } else {
+            // What should the user see when the login is unsuccessful?
+            loginMessage.setText("Incorrect Username/Password. Please Try Again!");
+            loginMessage.setVisible(true);
+            
+        }
+       
+    }
+
+    @FXML
+    public void initialize() {
+        // What should the user see when the screen loads?
+        System.out.println("Loading...");
+        loginMessage.setVisible(false);
+    }
+
+}
